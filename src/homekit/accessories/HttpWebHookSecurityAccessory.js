@@ -77,14 +77,14 @@ HttpWebHookSecurityAccessory.prototype.getTargetSecurityState = function(callbac
 HttpWebHookSecurityAccessory.prototype.setTargetSecurityState = function(newState, callback, context) {
   this.log("Target Security state for '%s'...", this.id);
   this.storage.setItemSync("http-webhook-target-security-state-" + this.id, newState);
-  this.storage.setItemSync("http-webhook-current-security-state-" + this.id, newState);
+  //this.storage.setItemSync("http-webhook-current-security-state-" + this.id, newState);
   var urlToCall = this.setStateURL.replace("%d", newState);
   var urlMethod = this.setStateMethod;
   var urlBody = this.setStateBody;
   var urlForm = this.setStateForm;
   var urlHeaders = this.setStateHeaders;
   Util.callHttpApi(this.log, urlToCall, urlMethod, urlBody, urlForm, urlHeaders, this.rejectUnauthorized, callback, context, (function() {
-    this.service.getCharacteristic(Characteristic.SecuritySystemCurrentState).updateValue(newState, undefined, null);
+    //this.service.getCharacteristic(Characteristic.SecuritySystemCurrentState).updateValue(newState, undefined, null);
   }).bind(this));
 };
 
